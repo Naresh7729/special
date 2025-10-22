@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Pruthvi 💜</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#5B21B6,#9333EA,#C084FC);
+  color:white;text-align:center;min-height:100vh;overflow-x:hidden;
+}
+
+h1{font-family:'Pacifico',cursive;font-size:2.8rem;margin-top:25px}
+.birthday-text{font-size:1.8rem;color:#FFD700;margin-bottom:20px}
+
+/* 3D Gallery */
+.gallery-container{perspective:900px;width:250px;height:170px;margin:30px auto;position:relative}
+.carousel{width:100%;height:100%;position:absolute;transform-style:preserve-3d;
+animation:rotate 25s infinite linear}
+.carousel-item{
+  position:absolute;width:180px;height:150px;border-radius:12px;overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3)
+}
+.carousel-item img{width:100%;height:100%;object-fit:cover}
+@keyframes rotate{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+
+/* Boxes */
+.surprise-title{font-size:1.5rem;margin-top:40px;color:#FFD700}
+.surprise-container{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin-top:20px}
+.gift-box{width:100px;height:100px;position:relative;cursor:pointer}
+.box{width:100%;height:100%;border-radius:12px;background:linear-gradient(45deg,#F97316,#FB923C);display:flex;align-items:center;justify-content:center}
+.box-lid{width:110%;height:20%;position:absolute;top:-18%;left:-5%;background:linear-gradient(45deg,#EA580C,#F97316);border-radius:10px 10px 0 0;transform-origin:center bottom;transition:.4s}
+.gift-box.opened .box-lid{transform:rotateX(100deg)}
+
+audio{width:100%;margin:10px 0}
+input[type="text"]{width:90%;padding:6px;border:none;border-radius:6px;font-size:.9rem;margin:6px 0}
+.correct{color:lime;font-weight:bold}
+.wrong{color:red;font-weight:bold}
+
+/* Modal */
+.modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.85);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  z-index:9999;padding:20px
+}
+.modal-content{
+  background:white;color:#7E22CE;border-radius:14px;padding:20px;
+  max-width:600px;width:95%;text-align:center;position:relative
+}
+.close-btn{
+  position:absolute;top:10px;right:15px;border:none;border-radius:50%;
+  width:30px;height:30px;background:#7E22CE;color:white;font-size:18px;cursor:pointer
+}
+.modal-content img{max-width:100%;border-radius:10px;margin-top:10px}
+
+/* Horizontal scroll container for images */
+.image-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 10px;
+  padding: 10px 0;
+  max-width: 100%;
+}
+.image-scroll-container img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* --- Intro Overlay --- */
+#introOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg,#4C1D95,#7E22CE,#C084FC);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+#startBtn {
+  background: #FFD700;
+  color: #7E22CE;
+  font-weight: bold;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+#startBtn:hover { background: #FACC15; }
+
+/* TATA animation */
+.tata-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  animation: walkIn 3s ease forwards;
+}
+@keyframes walkIn {
+  0% { transform: translateX(-120%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+#tataText {
+  opacity: 0;
+  font-family: 'Pacifico', cursive;
+  font-size: 2rem;
+  margin-top: 20px;
+  animation: fadeIn 2s 3s forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+#nameInputContainer {
+  opacity: 0;
+  animation: fadeIn 2s 6s forwards;
+  margin-top: 20px;
+}
+#nameInputContainer input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  text-align: center;
+}
+#nameInputContainer button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background: #FFD700;
+  border: none;
+  font-weight: bold;
+  color: #7E22CE;
+  cursor: pointer;
+}
+@media(max-width:600px){
+  h1{font-size:2.2rem}
+  .gallery-container{width:220px;height:150px}
+  .carousel-item{width:150px;height:100px}
+}
+</style>
+</head>
+<body>
+
+<!-- Intro Overlay -->
+<div id="introOverlay">
+  <button id="startBtn">Start 🎉</button>
+</div>
+
+<!-- Main Content (hidden initially) -->
+<div id="mainContent" style="display:none">
+  <audio id="bgMusic" autoplay loop>
+    <source src="still with you.mp3" type="audio/mp3">
+  </audio>
+
+  <h1>Happy Birthday 💜</h1>
+  <div class="birthday-text">Pruthvi!</div>
+
+  <div class="gallery-container">
+    <div class="carousel">
+      <div class="carousel-item" style="transform:rotateY(0deg) translateZ(200px)">
+        <img src="IMG-20250930-WA0074.jpg">
+      </div>
+      <div class="carousel-item" style="transform:rotateY(120deg) translateZ(200px)">
+        <img src="IMG20250425132852.jpg">
+      </div>
+      <div class="carousel-item" style="transform:rotateY(240deg) translateZ(200px)">
+        <img src="IMG-20251017-WA0011.jpg">
+      </div>
+    </div>
+  </div>
+
+  <div class="surprise-title">🎁 Tap a Box 🎁</div>
+  <div class="surprise-container">
+    <div class="gift-box" id="audioBox"><div class="box"></div><div class="box-lid"></div></div>
+    <div class="gift-box" id="imageBox"><div class="box" style="background:linear-gradient(45deg,#3B82F6,#60A5FA)"></div><div class="box-lid" style="background:linear-gradient(45deg,#2563EB,#3B82F6)"></div></div>
+    <div class="gift-box" id="messageBox"><div class="box" style="background:linear-gradient(45deg,#16A34A,#22C55E)"></div><div class="box-lid" style="background:linear-gradient(45deg,#15803D,#16A34A)"></div></div>
+  </div>
+</div>
+
+<script>
+const startBtn = document.getElementById("startBtn");
+const introOverlay = document.getElementById("introOverlay");
+const mainContent = document.getElementById("mainContent");
+
+startBtn.addEventListener("click", () => {
+  introOverlay.innerHTML = `
+    <div class="tata-container">
+      <img src="tata-dance.gif" width="250" height="250" alt="TATA Dancing">
+    </div>
+    <div id="tataText">Happy Birthday Pruthvi 💜</div>
+    <div id="nameInputContainer">
+      <input type="text" id="nameInput" placeholder="Enter your name">
+      <button id="goBtn">Go</button>
+      <div id="errorMsg" style="margin-top:8px;color:#FFD700;"></div>
+    </div>
+  `;
+  const goInterval = setTimeout(() => {
+    const goBtn = document.getElementById("goBtn");
+    const nameInput = document.getElementById("nameInput");
+    const errorMsg = document.getElementById("errorMsg");
+
+    goBtn.addEventListener("click", () => {
+      if (nameInput.value.trim().toLowerCase() === "pruthvi") {
+        introOverlay.style.display = "none";
+        mainContent.style.display = "block";
+      } else {
+        errorMsg.textContent = "❌ Oops! Try again 💜";
+      }
+    });
+  }, 6000);
+});
+
+/* Your existing code for boxes and modals */
+const bgMusic=document.getElementById("bgMusic");
+if(bgMusic) bgMusic.volume=0.4;
+
+document.addEventListener("click",()=>{if(bgMusic && bgMusic.paused)bgMusic.play().catch(()=>{})},{once:true});
+
+function openModal(html){
+  const m=document.createElement("div");
+  m.className="modal";
+  m.innerHTML=`<div class='modal-content'>${html}<button class='close-btn'>&times;</button></div>`;
+  document.body.appendChild(m);
+  m.querySelector(".close-btn").onclick=()=>m.remove();
+  m.addEventListener("click",e=>{if(e.target===m)m.remove();});
+}
+
+document.getElementById("audioBox")?.addEventListener("click",()=>{
+  bgMusic.pause();
+  const quizData=[
+    {src:"Happy Birthday Pruthvi by V .mp3.mp3",ans:"V"},
+    {src:"Happy Birthday Pruthvi1.mp3.mp3",ans:"jungkook"},
+    {src:"Happy Birthday Pruthvi by rm.mp3.mp3",ans:"rm"},
+    {src:"Happy Birthday Pruthvi h-hope.mp3.mp3",ans:"j-hope"},
+    {src:"Happy Birthday Pruthvi suga.mp3.mp3",ans:"suga"},
+    {src:"Happy Birthday Pruthvi1 jimin.mp3.mp3",ans:"jimin"},
+    {src:"Happy Birthday Pruthvi1 jin.mp3.mp3",ans:"jin"},
+  ];
+  let html="<h3>🎧 Guess the Singer 🎤</h3>";
+  quizData.forEach((q,i)=>{
+    html+=`<audio controls src="${q.src}"></audio><br>
+    <input id='ans${i}' placeholder='Guess singer name'>
+    <div id='res${i}'></div><hr>`;
+  });
+  openModal(html);
+  quizData.forEach((q,i)=>{
+    const input=document.getElementById(`ans${i}`);
+    input.addEventListener("input",()=>{
+      const r=document.getElementById(`res${i}`);
+      if(input.value.trim().toLowerCase()===q.ans.toLowerCase()){
+        r.innerHTML="<span class='correct'>✅ Correct!</span>";
+      }else{r.innerHTML="<span class='wrong'>❌ Try again!</span>";}
+    });
+  });
+});
+
+document.getElementById("imageBox")?.addEventListener("click",()=>{
+  openModal(`<h3>💜 Surprise Photo 💜</h3>
+  <div class="image-scroll-container">
+    <img src='IMG-20251017-WA0011.jpg'>
+    <img src='IMG-20250109-WA0001.jpg'>
+    <img src='IMG-20250211-WA0003.jpg'>
+    <img src='IMG-20250522-WA0080.jpg'>
+    <img src='IMG-20250831-WA0001.jpg'>
+    <img src='WhatsApp Image 2025-10-19 at 4.44.12 PM (1).jpeg'>
+    <img src='WhatsApp Image 2025-10-19 at 4.44.12 PM.jpeg'>
+    <img src='WhatsApp Image 2025-10-19 at 4.44.13 PM.jpeg'>
+    <img src='Generated Image September 15, 2025 - 7_49AM (1).png'>
+    <img src='Generated Image September 15, 2025 - 12_12PM.png'>
+  </div>`);
+});
+
+document.getElementById("messageBox")?.addEventListener("click",()=>{
+  openModal(`<h3>💌 Birthday Message 💌</h3>
+  <p>You're the light that makes everything brighter 💜<br>
+  Stay happy and keep shining always! ✨
+  <br>💖 You are the kind of girl who came into my life and made it happier and more joyful. 🌈✨
+You filled the emptiness I had for a sister 👧💫, and along with that, I also got a best friend 🤗💞.
+Earlier, I used to feel that my decisions were always wrong 😔, but now it doesn’t feel like that anymore 😇.
+You forgave all my mistakes 🙏💖, guided me in the right direction 🛤️✨, and made my life even more awesome 🌟💫.
+I don’t even know what more to say — I just said what I felt 💬❤️.
+
+Sorry if I ever hurt you in any way 😢💐, and thank youuuuuuuu so much for being my sister and such a wonderful friend 💕👭.
+Just stay happy always 🌸😊 — and I promise, I’m never going to leave your life, no matter what happens 💞🫶.
+Love youuuu ❤️ Stay happy always 😘🌈</p>`);
+});
+</script>
+</body>
+</html>
